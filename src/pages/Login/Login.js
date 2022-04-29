@@ -9,23 +9,26 @@ export const Login = () => {
   const [password,setPassword] = useState()
   const [error,setError] = useState()
 
-  const {createUser , error:authError, loading} = useAuthentication();
+  const {login , error:authError, loading} = useAuthentication();
   
   const handleSubmit = async (e) => {
-
+    e.preventDefault();
     setError('');
 
     const user = {
       email,
       password,
     };
-    const res = await createUser(user)
+    const res = await login(user)
     console.log(res)
   };
 
   useEffect(() => {
-    
-  })
+    console.log(authError);
+    if(authError)(
+      setError(authError)
+    )
+  },[authError]);
 
   return (
     <div className={styles.login}>
@@ -39,8 +42,8 @@ export const Login = () => {
             name="email"
             required
             placeholder='E-mail do usuario'
-            value={email}
             onChange={(e) => setEmail(e.target.value)}
+            value={email}
             />
           </label>
           <label>
@@ -50,8 +53,8 @@ export const Login = () => {
             name='password'
             required
             placeholder='Digite sua senha'
-            value={password}
             onChange={(e) => setPassword(e.target.value)}
+            value={password}
             />
           </label>
           {!loading && <button className='btn'>Entrar</button>}
