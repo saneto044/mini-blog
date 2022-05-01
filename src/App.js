@@ -22,6 +22,7 @@ import { Login } from './pages/Login/Login';
 import { Register } from './pages/Register/Register';
 import { CreatePost } from './pages/CreatePost/CreatePost';
 import { Dashboard } from './pages/Dashboard/Dashboard';
+import { NotFound } from './pages/404/NotFound';
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
                  <Route path="/register" element={!user ? <Register /> : <Navigate to="/" /> } />
                  <Route path="/post/create" element={<CreatePost />} />
                  <Route path ="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
+                 <Route path="*" element={<NotFound/>} />
                </Routes>
            </div>
            <Footer />
